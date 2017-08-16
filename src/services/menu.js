@@ -1,7 +1,7 @@
 import { request, config } from '../utils'
 
 const { api } = config
-const { menu } = api
+const { menus } = api
 
 export async function query (params) {
   return request({

@@ -9,7 +9,7 @@ function NumberCard({ icon, color, title, number, countUp }) {
     <Card className={styles.numberCard} bordered={false} bodyStyle={{
       padding: 0,
     }}>
-    <Icon className={styles.iconWarp} style={{ color }} type={icob} />
+    <Icon className={styles.iconWarp} style={{ color }} type={icon} />
     <div className={styles.content}>
       <p className={styles.title}>{title || 'No Title'}</p>
       <p className={styles.number}>

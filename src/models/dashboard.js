@@ -1,5 +1,5 @@
 import { parse } from 'qs'
-import { MyCity, queryWeather, query } from '../services/dashboard'
+import { myCity, queryWeather, query } from '../services/dashboard'
 
 let zuimei = {
   parseActualData (actual) {

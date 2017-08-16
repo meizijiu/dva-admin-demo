@@ -31,7 +31,7 @@ function Sales ({ data }) {
               content={(content) => {
                 const list = content.payload.map((item, key) => <li key={key} className={styles.tipitem}><span className={styles.radiusdot} style={{ background: item.color }} />{`${item.name}${item.value}`}</li>)
 
-                return <div className={styls.tooltip}><p className={styles.tiptitle}>{content.label}</p><ul>{list}</ul></div>
+                return <div className={styles.tooltip}><p className={styles.tiptitle}>{content.label}</p><ul>{list}</ul></div>
               }}
             />
             <Line type="monotone" dataKey="Food" stroke={color.purple} strokeWidth={3} dot={{ fill: color.purple }} activeDot={{ r: 5,strokeWidth: 0 }} />

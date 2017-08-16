@@ -84,7 +84,7 @@ function Dashboard ({ dashboard }) {
         </Card>
       </Col>
       <Col lg={8} md={24}>
-        <Card bordered={false} {...bodyStyle}>
+        <Card bordered={false} bodyStyle={{ ...bodyStyle.bodyStyle, padding: 0 }}>
           <User {...user} />
         </Card>
       </Col>

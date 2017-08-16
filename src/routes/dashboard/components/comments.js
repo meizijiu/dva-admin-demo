@@ -6,16 +6,16 @@ import styles from './comments.less'
 
 const status = {
   1: {
-    color: color.green,
-    text: 'APPRPVED',
+    'color': color.green,
+    'text': 'APPRPVED',
   },
   2: {
-    color: color.yellow,
-    text: 'PENDING',
+    'color': color.yellow,
+    'text': 'PENDING',
   },
   3: {
-    color: color.red,
-    text: 'REJECTED',
+    'color': color.red,
+    'text': 'REJECTED',
   },
 }
 
@@ -31,16 +31,18 @@ function Comments ({ data }) {
     {
       title: 'content',
       dataIndex: 'content',
-      render: (text, it) => (
-        <div>
-          <h5 className={styles.name}>{it.name}</h5>
-          <p className={styles.content}>{it.content}</p>
-          <div className={styles.daterow}>
-            <Tag color={styles[it.status].color}>{status[it.status].text}</Tag>
-            <span className={styles.date}>{it.date}</span>
+      render: (text, it) => {
+        return (
+          <div>
+            <h5 className={styles.name}>{it.name}</h5>
+            <p className={styles.content}>{it.content}</p>
+            <div className={styles.daterow}>
+              <Tag color={status[it.status].color}>{status[it.status].text}</Tag>
+              <span className={styles.date}>{it.date}</span>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     },
   ]
 
@@ -50,7 +52,7 @@ function Comments ({ data }) {
         pagination={false}
         showHeader={false}
         columns={columns}
-        rowKe={(record, key) => key}
+        rowKey={(record, key) => key}
         dataSource={data.filter((item, key) => key < 3)}
         />
     </div>

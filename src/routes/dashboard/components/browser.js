@@ -4,20 +4,20 @@ import { Table, Tag } from 'antd'
 import { color } from '../../../utils'
 import styles from './browser.less'
 
-const status = [
+const status = {
   1: {
-    color: color.green,
+    'color': color.green,
   },
   2: {
-    color: color.red,
+    'color': color.red,
   },
   3: {
-    color: color.blue,
+    'color': color.blue,
   },
   4: {
-    color: color.yellow,
+    'color': color.yellow,
   }
-]
+}
 
 function Browser ({ data }) {
   const columns = [
@@ -30,8 +30,12 @@ function Browser ({ data }) {
       title: 'percent',
       dataIndex: 'percent',
       className: styles.percent,
-      render: (text, it) => <Tag color={status[it.status].color}>{text}%</Tag>,
-    }
+      render: (text, it) => {
+        return (
+          <Tag color={status[it.status].color}>{text}%</Tag>
+        )
+      },
+    },
   ]
 
   return <Table pagination={false} showHeader={false} columns={columns} rowKey={(record, key) => key} dataSource={data} />

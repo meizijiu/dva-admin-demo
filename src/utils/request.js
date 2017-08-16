@@ -19,8 +19,8 @@ const fetch = (options) => {
     try {
       let domain = ''
       if (url.match(/[a-zA-z]+:\/\/[^/]*/)) {
-        domin = url.match(/[a-zA-z]+:\/\/[^/]*/)[0]
-        url = url.slice(domin.length)
+        domain = url.match(/[a-zA-z]+:\/\/[^/]*/)[0]
+        url = url.slice(domain.length)
       }
 
       const match = pathToRegexp.parse(url)
