@@ -97,6 +97,7 @@ const arrayToTree = (array, id = 'id', pid = 'pid', children = 'children') => {
 
   data.forEach((item) => {
     let hashVP = hash[item[pid]]
+
     if (hashVP) {
       !hashVP[children] && (hashVP[children] = [])
       hashVP[children].push(item)
@@ -104,6 +105,7 @@ const arrayToTree = (array, id = 'id', pid = 'pid', children = 'children') => {
       result.push(item)
     }
   })
+
   return result
 }
 

@@ -165,8 +165,6 @@ let zuimei = {
   },
 }
 
-
-
 export default {
   namespace : 'dashboard',
   state : {

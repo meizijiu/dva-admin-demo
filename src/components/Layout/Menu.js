@@ -33,7 +33,7 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
       return (
         <Menu.Item key={item.id}>
           <Link to={item.route}>
-            {item.icon && <Icon type={item.type} />}
+            {item.icon && <Icon type={item.icon} />}
             {(!siderFoldN || !menuTree.includes(item)) && item.name }
           </Link>
         </Menu.Item>
@@ -46,7 +46,7 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
   const getAncestorKeys = (key) => {
     let map = {}
     const getParent = (index) => {
-      const result = [Stirng](levelMap[index])
+      const result = [String(levelMap[index])]
       if (levelMap[result[0]]) {
         result.unshift(getParent(result[0])[0])
       }
@@ -54,29 +54,71 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
     }
 
     for (let index in levelMap) {
-      if ({}.hasOwnProperty.call(levelMap, index) {
+      if ({}.hasOwnProperty.call(levelMap, index)) {
         map[index] = getParent(index)
-      })
+      }
     }
     return map[key] || []
   }
 
   const onOpenChange = (openKeys) => {
-    
-  }
+    console.log(openKeys)
+    console.log(navOpenKeys)
 
+    const latestOpenKey = openKeys.find(key => !navOpenKeys.includes(key))
+    const latestCloseKey = navOpenKeys.find(key => !openKeys.includes(key))
+
+    console.log(latestOpenKey)
+    console.log(latestCloseKey)
+
+    let nextOpenKeys = []
+
+    if (latestOpenKey) {
+      nextOpenKeys = getAncestorKeys(latestOpenKey).concat(latestOpenKey)
+    }
+    if (latestCloseKey) {
+      nextOpenKeys = getAncestorKeys(latestCloseKey)
+    }
+    changeOpenKeys(nextOpenKeys)
+  }
 
   let menuProps = !siderFold ? {
     onOpenChange,
     openKeys: navOpenKeys,
   } : {}
 
+  // 寻找选中路由
+  let currentMenu
+  let defaultSelectedKeys
+  for (let item of menu) {
+    if (item.route && PathToRegexp(item.route).exec(location.pathname)) {
+      currentMenu = item
+      break
+    }
+  }
+
+  const getPathArray = (array, current, pid, id) => {
+    let result = [String(current[id])]
+
+    const getPath = (item) => {
+      if (item && item.pid) {
+        result.unshift(String(item.pid))
+        getPath(queryArray(array, item.pid, id))
+      }
+    }
+    getPath(current)
+    return result
+  }
+  if (currentMenu) {
+    defaultSelectedKeys = getPathArray(menu, currentMenu, 'mpid', 'id')
+  }
+
   return (
     <Menu
       {...menuProps}
       mode={siderFold ? 'vertical' : 'inline'}
       theme={darkTheme ? 'dark' : 'light'}
-      onClick={handleClickMenu}
+      onClick={handleClickNavMenu}
       defaultSelectedKeys={defaultSelectedKeys}
       >
         {menuItems}
