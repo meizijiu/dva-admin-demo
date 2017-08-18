@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Breadcrumb, Icon } from 'antd'
 import { Link } from 'dva/router'
-import { Icon, Breadcrumb } from 'antd'
-import { queryArray } from '../../utils'
 import pathToRegexp from 'path-to-regexp'
+import { queryArray } from '../../utils'
 import styles from './Bread.less'
 
 const Bread = ({ menu }) => {
@@ -11,9 +11,7 @@ const Bread = ({ menu }) => {
   let current
 
   for (let index in menu) {
-    let result = pathToRegexp(menu[index].route).exec(location.pathname)
-
-    if (result) {
+    if (menu[index].route && pathToRegexp(menu[index].route).exec(location.pathname)) {
       current = menu[index]
       break
     }
@@ -23,7 +21,7 @@ const Bread = ({ menu }) => {
     pathArray.unshift(item)
 
     if (item.bpid) {
-      getPathArray(queryArray(item, item.bpid, 'mpid'))
+      getPathArray(queryArray(menu, item.bpid, 'id'))
     }
   }
 

@@ -38,6 +38,14 @@ const Routers = function ({ history, app }) {
             }, 'login')
           },
         }, {
+          path: 'post',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/post'))
+              cb(null, require('./routes/post'))
+            }, 'post')
+          }
+        }, {
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
