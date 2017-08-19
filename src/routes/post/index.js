@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import styles from './index.less'
 
 const Post = ({ post, dispatch }) => {
+  console.dir(post)
+
   return (
     <div>
       <p>this is post</p>

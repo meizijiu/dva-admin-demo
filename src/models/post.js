@@ -1,18 +1,47 @@
-export default {
-  namespace: 'post',
-  state: {
+import modelExtend from 'dva-model-extend'
+import { pageModel } from './commonTable'
+import { query } from '../services/posts'
 
-  },
+export default modelExtend(pageModel, {
+  namespace: 'post',
 
   effects: {
+    * query({
+      payload
+    }, { call,put }) {
+      const data = yield call(query, payload)
 
-  },
-
-  reducers: {
-
+      if (data.success) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            list: data.data,
+            pagination: {
+              current: Number(payload.page) || 1,
+              pageSize: Number(payload.pageSize) || 10,
+              total: data.total,
+            }
+          }
+        })
+      } else {
+        throw data
+      }
+    }
   },
 
   subscriptions: {
-    
+    setup ({ dispatch, history }) {
+      history.listen((location) => {
+        if (location.pathname === '/post') {
+          dispatch({
+            type: 'query',
+            payload: {
+              status: 2,
+              ...location.query
+            }
+          })
+        }
+      })
+    }
   }
-}
+})

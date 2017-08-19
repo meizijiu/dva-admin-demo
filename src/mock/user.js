@@ -173,7 +173,6 @@ module.exports = {
     res.status(204).end()
   },
 
-
   [`POST ${apiPrefix}/user`] (req, res) {
     const newData = req.body
     newData.createTime = Mock.mock('@now')

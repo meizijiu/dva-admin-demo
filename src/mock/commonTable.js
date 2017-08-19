@@ -1,5 +1,24 @@
-import Mock from 'mockjs'
-import { config, queryArray } from '../utils'
+const Mock = require('mockjs')
+const config = require('../utils/config')
+
+const queryArray = (array, key, keyAlias = 'key') => {
+  if (!(array instanceof Array)) {
+    return null
+  }
+  let data
+
+  for (const item of array) {
+    if (item[keyAlias] === key) {
+      data = item
+      break
+    }
+  }
+
+  if (data) {
+    return data
+  }
+  return null
+}
 
 const NOTFOUND = {
   message: 'Not Found',
