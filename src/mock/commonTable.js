@@ -36,7 +36,7 @@ const posts = Mock.mock({
       },
       'status|1-2': 1,
       title: '@title',
-      author: '@cname',
+      author: '@last',
       categories: '@word',
       tags: '@word',
       'views|10-200': 1,

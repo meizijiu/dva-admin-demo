@@ -1,1 +1,19 @@
 @import "../../themes/vars.less";
+
+.posts {
+  background-color: #fff;
+  padding: 24px;
+
+  .table {
+    td.image {
+      line-height: 1;
+    }
+
+    :global {
+      .ant-table-tbody > tr > td,
+      .ant-table-thead > tr > th {
+        height: 60px;
+      }
+    }
+  }
+}
