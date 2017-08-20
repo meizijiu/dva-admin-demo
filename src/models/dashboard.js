@@ -1,14 +1,19 @@
 import { parse } from 'qs'
 import { myCity, queryWeather, query } from '../services/dashboard'
+import { strToDate } from '../utils'
 
 let zuimei = {
   parseActualData (actual) {
+    console.log(actual)
+
     let weather = {
-      icon: `http://www.zuimeitianqi.com/res/icon/${zuimei.getIconName(actual.wea, 'big')}`,
-      name: zuimei.getWeatherName(actual.wea),
-      temperature: actual.tmp,
-      dateTime: new Date(actual.PTm).format('MM-dd hh:mm'),
+      icon: '',
+      name: actual.today.weather,
+      temperature: actual.today.temperature,
+      dateTime: actual.today.date_y.strToDate(),
+      city: actual.today.city
     }
+
     return weather
   },
 
@@ -205,18 +210,19 @@ export default {
 
       yield put({ type: 'queryWeather', payload: { ...data } })
     },
-    * queryWeather (action, { call, put }) {
-      const myCityResult = yield call(myCity, { flg: 0 })
-      const result = yield call(queryWeather, { cityCode: myCityResult.selectCityCode })
-      const weather = zuimei.parseAcualData(result.data.actual)
 
-      weather.city = myCityResult.selectCityName
+    * queryWeather (action, { call, put }) {
+      const response = yield call(queryWeather, { cityname: '南京' })
+
+      const weather = zuimei.parseActualData(response.result)
+
+      console.log(weather)
 
       yield put({ type: 'queryWeatherSuccess',
-              payload: {
-                weather,
-              }
-            })
+        payload: {
+          weather,
+        }
+      })
     },
   },
 

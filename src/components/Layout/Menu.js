@@ -62,14 +62,8 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
   }
 
   const onOpenChange = (openKeys) => {
-    console.log(openKeys)
-    console.log(navOpenKeys)
-
     const latestOpenKey = openKeys.find(key => !navOpenKeys.includes(key))
     const latestCloseKey = navOpenKeys.find(key => !openKeys.includes(key))
-
-    console.log(latestOpenKey)
-    console.log(latestCloseKey)
 
     let nextOpenKeys = []
 

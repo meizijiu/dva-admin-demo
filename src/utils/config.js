@@ -24,4 +24,7 @@ module.exports = {
     v1test: `${APIV1}/test`,
     v2test: `${APIV2}/test`,
   },
+  appKey: {
+    weatherKey: '1d1d901605685444b9374061fa3d6375',
+  }
 }

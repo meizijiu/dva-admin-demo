@@ -123,6 +123,6 @@ const Dashboard = Mock.mock({
 
 module.exports = {
   [`GET ${apiPrefix}/dashboard`] (req, res) {
-    res.json(Dashboard)
+    res.status(200).json(Dashboard)
   }
 }

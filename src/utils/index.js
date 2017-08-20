@@ -40,6 +40,10 @@ Date.prototype.format = function (format) {
   return format
 }
 
+// 日期转换
+String.prototype.strToDate = function () {
+  return this.replace(/([\u4e00-\u9fa5])/g, '.').slice(0, -1)
+}
 
 /**
  * @param   {String}
