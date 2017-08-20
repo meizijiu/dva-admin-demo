@@ -82,6 +82,8 @@ const Post = ({ post, dispatch, loading, location }) => {
 Post.propTypes = {
   post: PropTypes.object,
   dispatch: PropTypes.func,
+  loading: PropTypes.object,
+  location: PropTypes.object
 }
 
 export default connect(({ post }) => ({ post }))(Post)

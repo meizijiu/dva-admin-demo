@@ -4,8 +4,6 @@ import { strToDate } from '../utils'
 
 let zuimei = {
   parseActualData (actual) {
-    console.log(actual)
-
     let weather = {
       icon: '',
       name: actual.today.weather,
