@@ -1,15 +1,20 @@
 import modelExtend from 'dva-model-extend'
 import { pageModel } from './commonTable'
-import { queryUsers, add } from '../services/users'
+import { queryUsers } from '../services/users'
+import { update, remove } from '../services/user'
 
 export default modelExtend(pageModel, {
   namespace: 'user',
-  state: {},
+  state: {
+    currentItem: {},
+    modalVisible: false,
+    modalType: 'create',
+    selectedRowKeys: []
+  },
 
   effects: {
     * query ({ payload }, { call, put }) {
       const result = yield call(queryUsers, payload)
-
        if (result.success) {
          yield put({
            type: 'querySuccess',
@@ -31,21 +36,53 @@ export default modelExtend(pageModel, {
 
     },
 
-    * delete () {
+    * delete ({ payload }, { call, put, select }) {
+      const { page = 1, pageSize = 10, id } = payload
 
+      const data = yield call(remove, { id: id })
+
+      const { selectedRowKeys } = yield select(_ => _.user)
+
+      if (data.success) {
+        yield put({ type: 'updateState', payload: { selectedRows: selectedRowKeys.filter(_ => _ !== id) } })
+        yield put({ type: 'query', payload: { page: page, pageSize: pageSize } })
+      } else {
+        throw data
+      }
     },
 
-    * multiDelete () {
+    * update ({ payload }, { call, put, select }) {
+      const { page = 1, pageSize = 10, ...params } = payload
 
-    },
+      const id = yield select(({ user }) => user.currentItem.id)
+      const newUser = { ...params, id }
 
-    * update () {
+      const data = yield call(update, newUser)
 
+      if (data.success) {
+          yield put({ type: 'hideModal' })
+          yield put({ type: 'query', payload: { page: page, pageSize: pageSize }})
+      } else {
+        throw data
+      }
     }
   },
 
   reducers: {
+    showModal (state, { payload }) {
+      return {
+        ...state,
+        ...payload,
+        modalVisible: true,
+      }
+    },
 
+    hideModal (state) {
+      return {
+        ...state,
+        modalVisible: false
+      }
+    }
   },
 
   subscriptions: {

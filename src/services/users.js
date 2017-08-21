@@ -10,17 +10,3 @@ export async function queryUsers (params) {
     data: params
   })
 }
-
-export async function add (params) {
-  return request({
-    url: user,
-    data: params
-  })
-}
-
-export async function update (params) {
-  return request({
-    url: user,
-    data: params
-  })
-}

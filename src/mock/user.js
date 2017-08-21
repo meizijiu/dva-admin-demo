@@ -170,6 +170,7 @@ module.exports = {
 
   [`DELETE ${apiPrefix}/users`] (req, res) {
     const { ids } = req.body
+
     database = database.filter(item => !ids.some(_ => _ === item.id))
     res.status(204).end()
   },
@@ -207,6 +208,8 @@ module.exports = {
   },
 
   [`PATCH ${apiPrefix}/user/:id`] (req, res) {
+    console.log(req.body)
+
     const { id } = req.params
     const editItem = req.body
     let isExist = false

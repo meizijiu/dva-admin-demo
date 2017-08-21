@@ -1,9 +1,30 @@
 import react from 'react'
 import PropTypes from 'prop-types'
-import { Table, Avatar } from 'antd'
+import { Table, Avatar, Modal } from 'antd'
+import DropOptions from '../../components/DropOptions'
 import styles from './lists.less'
 
-const List = ({ location, ...listProps }) => {
+const confirm = Modal.confirm
+
+const List = ({ location, onEditItem, onDeleteItem, ...listProps }) => {
+  const options = [
+    { key: '1', name: 'Update' },
+    { key: '2', name: 'Delete' }
+  ]
+
+  const handleMenuClick = (e, record) => {
+    if (e.key === '1') {  
+      onEditItem(record)
+    } else if (e.key === '2') {
+      confirm({
+        title: 'are you sure delete this item?',
+        onOk () {
+          onDeleteItem(record)
+        }
+      })
+    }
+  }
+
   const columns = [
     {
       title: 'Avatar',
@@ -41,6 +62,12 @@ const List = ({ location, ...listProps }) => {
     {
       title: 'CreateTime',
       dataIndex: 'createTime',
+    },
+    {
+      title: 'Options',
+      dataIndex: 'options',
+      render: (text, record) => (<DropOptions onMenuClick={e => handleMenuClick(e, record)}
+        menuOptions={options} />)
     }
   ]
 
