@@ -18,3 +18,11 @@ export async function remove (params) {
     data: params
   })
 }
+
+export async function add (params) {
+  return request({
+    url: user,
+    method: 'post',
+    data: params
+  })
+}

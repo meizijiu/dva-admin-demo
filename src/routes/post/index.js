@@ -65,7 +65,7 @@ const Post = ({ post, dispatch, loading, location }) => {
   }
 
   return (
-    <div className={styles.posts}>
+    <div className="content-inner">
       <Table pagination={paginationConfig}
              columns={columns}
              rowKey={(record, key) => key}

@@ -177,6 +177,10 @@ module.exports = {
 
   [`POST ${apiPrefix}/user`] (req, res) {
     const newData = req.body
+
+    console.log(newData)
+    return false
+
     newData.createTime = Mock.mock('@now')
     newData.avatar = newData.avatar || Mock.Random.image('100x100', Mock.Random.color(), '#757575', 'png', newData.nickName.substr(0, 1))
     newData.id = Mock.mock('@id')

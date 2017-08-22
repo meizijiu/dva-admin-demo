@@ -1,7 +1,7 @@
 import modelExtend from 'dva-model-extend'
 import { pageModel } from './commonTable'
 import { queryUsers } from '../services/users'
-import { update, remove } from '../services/user'
+import { update, remove, add } from '../services/user'
 
 export default modelExtend(pageModel, {
   namespace: 'user',
@@ -32,8 +32,12 @@ export default modelExtend(pageModel, {
        }
     },
 
-    * add () {
+    * create ({ payload }, { call, put }) {
+      console.log(payload)
 
+      const data = yield call(add, payload)
+
+      console.log(data)
     },
 
     * delete ({ payload }, { call, put, select }) {

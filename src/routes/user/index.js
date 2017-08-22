@@ -4,6 +4,7 @@ import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import List from './lists'
 import Modal from './modal'
+import Filter from './filter'
 
 const User = ({ user, dispatch, location }) => {
   const { list, pagination, modalVisible, currentItem, modalType, selectedRowKeys } = user
@@ -70,6 +71,8 @@ const User = ({ user, dispatch, location }) => {
     maskClosable: false,
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
+      console.log(data)
+
       dispatch({
         type: `user/${modalType}`,
         payload: data,
@@ -90,8 +93,33 @@ const User = ({ user, dispatch, location }) => {
     ...tableConfig
   }
 
+  const filterProps = {
+    filter: {
+      ...location.query,
+    },
+    onFilterChange(value) {
+      dispatch(routerRedux.push({
+        pathname: location.pathname,
+        query: {
+          ...value,
+          page: 1,
+          pageSize,
+        }
+      }))
+    },
+    onAdd () {
+      dispatch({
+        type:'user/showModal',
+        payload: {
+          modalType: 'create'
+        }
+      })
+    },
+  }
+
   return (
-    <div>
+    <div className="content-inner">
+      <Filter {...filterProps} />
       <List {...listProps} />
       {modalVisible && <Modal {...modalProps} />}
     </div>

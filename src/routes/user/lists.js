@@ -13,7 +13,7 @@ const List = ({ location, onEditItem, onDeleteItem, ...listProps }) => {
   ]
 
   const handleMenuClick = (e, record) => {
-    if (e.key === '1') {  
+    if (e.key === '1') {
       onEditItem(record)
     } else if (e.key === '2') {
       confirm({
@@ -87,7 +87,9 @@ const List = ({ location, onEditItem, onDeleteItem, ...listProps }) => {
 
 List.propTypes = {
   location: PropTypes.object,
-  listProps: PropTypes.object
+  listProps: PropTypes.object,
+  onEditItem: PropTypes.func,
+  onDeleteItem: PropTypes.func,
 }
 
 export default List
