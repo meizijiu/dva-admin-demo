@@ -73,6 +73,7 @@ const Filter = ({
     let fields = getFieldsValue()
     fields[key] = values
     fields = handleFields(fields)
+
     onFilterChange(fields)
   }
 
@@ -99,7 +100,7 @@ const Filter = ({
               style={{ width: '100%' }}
               format="YYYY-MM-DD HH:mm"
               placeholder={['开始时间', '结束时间']}
-              onChange={ handleChange.bind(null, 'address') }
+              onChange={ handleChange.bind(null, 'createTime') }
                />)}
           </FormItem>
         </Col>

@@ -93,6 +93,7 @@ const queryURL = (name) => {
  */
 const arrayToTree = (array, id = 'id', pid = 'pid', children = 'children') => {
   let data = lodash.cloneDeep(array)
+
   let result = []
   let hash = {}
   data.forEach((item, index) => {

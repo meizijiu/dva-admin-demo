@@ -4,6 +4,8 @@ import { Router } from 'dva/router'
 import App from './routes/app'
 
 const registerModel = (app, model) => {
+  console.dir(app)
+
   if (!(app._models.filter(m => m.namespace === model.namespace).length === 1)) {
     app.model(model)
   }
@@ -52,6 +54,14 @@ const Routers = function ({ history, app }) {
               registerModel(app, require('./models/user'))
               cb(null, require('./routes/user'))
             }, 'user')
+          }
+        }, {
+          path: 'request',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/request'))
+              cb(null, require('./routes/request'))
+            }, 'request')
           }
         }, {
           path: '*',
