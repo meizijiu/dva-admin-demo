@@ -59,7 +59,6 @@ const Routers = function ({ history, app }) {
           path: 'request',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
-              registerModel(app, require('./models/request'))
               cb(null, require('./routes/request'))
             }, 'request')
           }
