@@ -63,6 +63,13 @@ const Routers = function ({ history, app }) {
             }, 'request')
           }
         }, {
+          path: 'UIElement/editor',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              cb(null, require('./routes/UIElement/editor'))
+            }, 'UIElement-editor')
+          }
+        }, {
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
