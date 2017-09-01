@@ -2336,7 +2336,7 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-draft-js@^0.10.0, draft-js@~0.10.0:
+draft-js@^0.10.0, draft-js@^0.10.1, draft-js@~0.10.0:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.1.tgz#6f1219d8095729691429ca6fd7a58d2a8be5cb67"
   dependencies:
@@ -2344,9 +2344,9 @@ draft-js@^0.10.0, draft-js@~0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
-draftjs-to-html@^0.7.0:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.7.4.tgz#6932b2ebae5c74bd70bc996f2b51d04f4688a48b"
+draftjs-to-html@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.7.5.tgz#50b2d1d813fb499966de8106fbeea9ea52c76951"
 
 draftjs-to-markdown@^0.4.4:
   version "0.4.4"

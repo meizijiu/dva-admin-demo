@@ -59,6 +59,10 @@ module.exports = (webpackConfig, env) => {
     })
   ])
 
+  // Alias
+  webpackConfig.resolve.alias = {
+    components: `${__dirname}/src/components`,
+  }
 
   return webpackConfig
 }
