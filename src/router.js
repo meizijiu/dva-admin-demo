@@ -70,6 +70,13 @@ const Routers = function ({ history, app }) {
             }, 'UIElement-editor')
           }
         }, {
+          path: 'UIElement/dataTable',
+          getComponent (nextState, cb) {
+            require.ensure([], (resolve) => {
+              cb(null, require('./routes/UIElement/dataTable'))
+            }, 'UIElement-dataTable')
+          }
+        },{
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
